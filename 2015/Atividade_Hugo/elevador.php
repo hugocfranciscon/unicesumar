@@ -1,77 +1,58 @@
 <?php
-class elevador {
+class Elevador {
+	protected $andarElevador;
+	protected $pessoas = array ();
+	protected $andarDesejado;
+	protected static $instance = NULL;
 	
-	private $andarElevador;
-	
-	public function setAndarElevador($andarElevador) {
-		$this->andarElevador = $andarElevador;
-	}
-	
-	public function getAndarElevador() {
+	public function getAndarElevador(){
 		return $this->andarElevador;
+	}	
+	
+	private function __construct() {
+		$this->andarElevador = 5;
 	}
 	
-	public function chamaElevador($andar) {
-		
-		echo "Pessoa está no " . $andar . "º andar. Elevador está no " . $this->andarElevador . "º andar \n";
-		echo "Pessoa chama o elevador. Elevador está no " . $this->andarElevador . "º andar \n";
-
-		if ($andar > $this->andarElevador) {
-			
-			for ($i = $this->andarElevador; $i <= $andar; $i++) {				
-				echo "Pessoa está no " . $andar . "º andar. Elevador está no " . $i . "º andar \n";				
-				$this->andarElevador = $andar;				
+	public static function getInstance() {
+		if (self::$instance == NULL) {
+			self::$instance = new self ();
+		}
+		return self::$instance;
+	}
+	
+	public function receberPessoa(Pessoa $pessoa) {
+		$this->pessoas [] = $pessoa;
+	}
+	
+	public function removerPessoa(Pessoa $pessoa) {
+		foreach ( $this->pessoas as $index => $pessoaNoElevador ) {
+			if ($pessoaNoElevador === $pessoa) {
+				unset ( $this->pessoas [$index] );
 			}
-						
-		} else if ($andar < $this->andarElevador) {			
-			
-			for ($i = $this->andarElevador; $i >= $andar; $i--) {				
-				echo "Pessoa está no " . $andar . "º andar. Elevador está no " . $i . "º andar \n";				
-				$this->andarElevador = $andar;				
-			}
-			
-		} else {
-						
-			echo "Pessoa está no " . $andar . "º andar. Elevador está no " . $this->andarElevador . "º andar \n";
-									
 		}
 	}
 	
-	public function entraElevador() {
-		
-		echo "Pessoa entra no elevador. Elevador está no " . $this->andarElevador . "º andar. \n";
-				
-	}
-	
-	public function chamaAndar($andar) {
-		
-		echo "Pessoa aperta o " . $andar . "º andar. Elevador está no " . $this->andarElevador . "º andar \n";
+	public function irParaOAndar($andar){
 		
 		if ($andar > $this->andarElevador) {
 		
 			for ($i = $this->andarElevador; $i <= $andar; $i++) {		
-				echo "Pessoa está no elevador. Elevador está no " . $i . "º andar \n";
+				echo "Elevador está no " . $i . "º andar \n";
 				$this->andarElevador = $andar;		
 			}
 				
 		} else if ($andar < $this->andarElevador) {
 				
 			for ($i = $this->andarElevador; $i >= $andar; $i--) {		
-				echo "Pessoa está no elevador. Elevador está no " . $i . "º andar \n";				
+				echo "Elevador está no " . $i . "º andar \n";				
 				$this->andarElevador = $andar;		
 			}
 		
 		} else {
 						
-			echo "Pessoa está no elevador. Elevador está no " . $this->andarElevador . "º andar \n";
+			echo "Elevador está no " . $this->andarElevador . "º andar \n";
 						
-		}
+		}		 		
 	}
 	
-	public function desceElevador() {
-		
-		echo "Pessoa sai do elevador. Elevador está no " . $this->andarElevador . "º andar. \n";
-		echo "Pessoa está no " . $this->andarElevador . "º andar. Elevador está no " . $this->andarElevador . "º andar \n";
-		
-	}	
 }
