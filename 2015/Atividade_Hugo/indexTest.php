@@ -27,20 +27,4 @@ class indexTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(8, Elevador::getInstance()->getAndarElevador());
 		
 	}
-	
-	/*
-	public function testElevador() {
-		
-		$pessoa = new Pessoa(3);
-		
-		$this->assertEquals(5, 5);
-		
-		
-		
-		
-		$this->assertEquals(5, 5);
-		
-		
-	}
-	*/
 }	
